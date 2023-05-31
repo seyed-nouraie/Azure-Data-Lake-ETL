@@ -1,2 +1,2 @@
-# NiFi-Azure
-Flows to route data from NiFi to Azure
+# Azure Data Lake ETL
+Flows to route data from on premise syslog to Azure
