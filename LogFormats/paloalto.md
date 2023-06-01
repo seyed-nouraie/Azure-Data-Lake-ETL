@@ -39,13 +39,30 @@ CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-sev
 #### 10.x
 CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-severity|rt=$cef-formatted-receive_time src=$src dst=$dst cs1=$rule suser=$srcuser duser=$dstuser ApplicationProtocol=$app cs4=$from cs5=$to deviceInboundInterface=$inbound_if deviceOutboundInterface=$outbound_if cnt=$repeatcnt SourcePort=$sport DestinationPort=$dport flexString1=$flags transportprotocol=$proto SimplifiedDeviceAction=$action request=$misc cs2=$category flexString2=$direction cat=$threatid requestMethod=$http_method requestClientApplication=$user_agent PanOSXForwarderfor=$xff PanOSReferer=$referer DeviceName=$device_name PanOSThreatCategory=$thr_category PanOSURLCatList=$url_category_list
 
-## Wildfire
-### Nifi
+##Additional Logs
+#### 10.x
+### Data
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-severity|src=$src dst=$dst cs1=$rule suser=$srcuser duser=$dstuser app=$app cs4=$from cs5=$to deviceInboundInterface=$inbound_if deviceOutboundInterface=$outbound_if cnt=$repeatcnt spt=$sport dpt=$dport flexString1=$flags proto=$proto act=$action request=$misc cs2=$category flexString2=$direction dvchost=$device_name PanOSThreatCategory=$thr_category
 
+### Wildfire
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-severity|src=$src dst=$dst cs1=$rule suser=$srcuser duser=$dstuser app=$app cs4=$from cs5=$to deviceInboundInterface=$inbound_if deviceOutboundInterface=$outbound_if cnt=$repeatcnt spt=$sport dpt=$dport flexString1=$flags proto=$proto act=$action request=$misc cs2=$category flexString2=$direction PanOSActionFlags=$actionflags cat=$threatid filePath=$cloud fileHash=$filedigest fileType=$filetype suid=$sender msg=$subject duid=$recipient dvchost=$device_name PanOSThreatCategory=$thr_category
 
-## VPN
-### Nifi
+### Config
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$result|$type|1|deviceExternalId=$serial shost=$host act=$cmd duser=$admin destinationServiceName=$client msg=$path dvchost=$device_name cs1=$before-change-detail cs2=$after-change-detail
 
-## System
-### Nifi
+### System
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-severity|fname=$object flexString2=$module msg=$opaque cat=$eventid dvchost=$device_name
 
+##Additional Logs
+#### 9.x
+### Data
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-severity|src=$src dst=$dst cs1=$rule suser=$srcuser duser=$dstuser app=$app cs4=$from cs5=$to deviceInboundInterface=$inbound_if deviceOutboundInterface=$outbound_if cnt=$repeatcnt spt=$sport dpt=$dport flexString1=$flags proto=$proto act=$action request=$misc cs2=$category flexString2=$direction dvchost=$device_name PanOSThreatCategory=$thr_category
+
+### Wildfire
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-severity|src=$src dst=$dst cs1=$rule suser=$srcuser duser=$dstuser app=$app cs4=$from cs5=$to deviceInboundInterface=$inbound_if deviceOutboundInterface=$outbound_if cnt=$repeatcnt spt=$sport dpt=$dport flexString1=$flags proto=$proto act=$action request=$misc cs2=$category flexString2=$direction PanOSActionFlags=$actionflags cat=$threatid filePath=$cloud fileHash=$filedigest fileType=$filetype suid=$sender msg=$subject duid=$recipient dvchost=$device_name PanOSThreatCategory=$thr_category
+
+### Config
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$result|$type|1|deviceExternalId=$serial shost=$host act=$cmd duser=$admin destinationServiceName=$client msg=$path dvchost=$device_name cs1=$before-change-detail cs2=$after-change-detail
+
+### System
+CEF:0|Palo Alto Networks|PAN-OS|$sender_sw_version|$subtype|$type|$number-of-severity|fname=$object flexString2=$module msg=$opaque cat=$eventid dvchost=$device_name
