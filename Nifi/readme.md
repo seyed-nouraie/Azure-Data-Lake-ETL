@@ -61,9 +61,26 @@ The schema is inferred with the full batch of sampled data and stored into the a
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">
 
 
+## Sentinel
+Logs with immediate security value is sent directly to Sentinel. The output group containing these logs are sent to the Sentinel processor group from the routing group above. 
 
+### Batch Convert to JSON
+The logs are converted from CEF to JSON. The record reader can use realtime schema inference, manual schema lookup, or a asynchronous schema lookup explained further below. The size is set to 500 KB to make sure we don't hit Sentinel ingestion limits.  
 
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/0acf1aaa-fe83-4939-a252-c3ada166f84d">
 
+### Azure Monitor HTTP API
+A data collection endpoint (DCE) and data collection rule (DCR) have already been created in Azure using [this tutorial]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal)). This processor sends logs to Azure monitor using that DCE. The processor performs authentication using an Oauth2 controller service, which uses Azure client credentials that have been granted access to that DCR.  
+
+A DCR can also be configured with [transformations]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-transformations#single-destination)) to send data to [built in tables ]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables)).
+
+API Call HTTP URL: https://<DCE_URI>/dataCollectionRules/<DCR_ID>/streams/<STREAM_NAME>?api-version=2021-11-01-preview
+Authorization Server URL: https://login.microsoftonline.com/<TENANTID>/oauth2/v2.0/token
+Scope: https://monitor.azure.com//.default
+
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/791a855e-462d-4ac4-ac93-a2b3f8067f9a">
+
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/759891f3-1f12-41f3-b921-2656884a9f99">
 
 
 
