@@ -5,7 +5,7 @@
 
 
 ### ListenSyslog
-We start with listening on for Syslog. There are two listen syslog processors, one for UDP and one for TCP, each listening on different ports. 
+We start with listening for Syslog. There are two listen syslog processors, one for UDP and one for TCP, each listening on different ports. 
 The syslog messages are handled individually so that the processor can parses the headers and syslog body and store their values into flowfile attribute. The syslog body attribute (syslog.body), will be used for tagging each flowfile acccording to the message type.
 
 
