@@ -27,7 +27,7 @@ After adding this attribute the processor removes the longer syslog.body attribu
 Records with the same sender.type are merged together. This batching increases efficiency downstream.
 <img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/ae2bef3a-0b59-4bc7-8eca-1912181e1b37">
 <br>    
-  
+<br>    
 <br>    
   
 ## Routing and Schema Inference
@@ -85,8 +85,10 @@ A data collection endpoint (DCE) and data collection rule (DCR) have already bee
 A DCR can also be configured with [transformations](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-transformations#single-destination) to send data to [built in tables](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables).  
 <br>    
 
+##### API Call Parameters
 API Call HTTP URL: https://<DCE_URI>/dataCollectionRules/<DCR_ID>/streams/<STREAM_NAME>?api-version=2021-11-01-preview 
 
+##### OAuth Parameters
 Authorization Server URL: https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token  
 
 Scope: https://monitor.azure.com//.default  
