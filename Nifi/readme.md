@@ -73,7 +73,7 @@ Logs with immediate security value is sent directly to Sentinel. The output grou
 <br>    
 
 ### Batch Convert to JSON
-The logs are converted from CEF to JSON. The record reader can use realtime schema inference, manual schema lookup, or a asynchronous schema lookup explained further below. The size is set to 500 KB to make sure we don't hit Sentinel ingestion limits.  
+The logs are converted from CEF to JSON. The record reader can use realtime schema inference, manual schema lookup, or a [asynchronous schema lookup](#Schema-Lookup) explained further below. The size is set to 500 KB to make sure we don't hit Sentinel ingestion limits.  
 <br>    
 
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/0acf1aaa-fe83-4939-a252-c3ada166f84d">
