@@ -26,7 +26,7 @@ Records with the same sender.type are batched into single flowfiles. This increa
   
   
 ## Routing and Schema Inference
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/0492fa2c-e203-424a-b6b5-22ca55ab6a3b">
+<img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/0492fa2c-e203-424a-b6b5-22ca55ab6a3b">
 
 ### Route - Log Sender and Attribute
 Records are sent to different output groups based on the sender.type attribute. This is to enable further routing downstream and schema inference.
