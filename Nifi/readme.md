@@ -32,7 +32,7 @@ Records with the same sender.type are batched into single flowfiles. This increa
 Records are sent to different output groups based on the sender.type attribute. This is to enable further routing downstream and schema inference.
 
 ### Schema Inference
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/8e85f06d-b83e-402c-9b7b-5eb8eff25192">
+<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/8e85f06d-b83e-402c-9b7b-5eb8eff25192">
 
 This processor group allows for asynchronous schema inference. This reduces the load of real time full schema inference while also preventing the need to manually add and update a schema.
 This works best for log types with relatively consitent schemas, or log types for which the full schema can be represented by a sample of the logs.
@@ -40,7 +40,7 @@ This works best for log types with relatively consitent schemas, or log types fo
 #### Control Rate
 Data is sampled using this processor group. This sampling rate can be increased to account for more volatile schemas.
 
-<img width="230" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/17f9089d-7738-4ee7-80f7-773476fe9d52">
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/17f9089d-7738-4ee7-80f7-773476fe9d52">
 
 
 
