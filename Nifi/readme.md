@@ -44,6 +44,21 @@ Data is sampled using this processor group. This sampling rate can be increased 
 
 
 
+#### Schema Inference and Cache Storage
+The schema is inferred with the full batch of sampled data and stored into the avro.schema attribute. This attribute then replaces the full flowfile text in the replacetext processor. Then this whole flowfile is stored in cache with the identifier being the same sender.type attribute.
+
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/c74dc641-1fc0-4bdb-a777-7b232d2d96dd">
+
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/328c8373-d02c-448d-a618-652d2e60c818">
+
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">
+
+
+
+
+
+
+
 
 
 
