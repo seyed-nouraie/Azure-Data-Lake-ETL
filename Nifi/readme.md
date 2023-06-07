@@ -2,6 +2,7 @@
 ### Contents
 * [Ingestion and Tagging](#Ingestion-and-Tagging)
 * [Routing and Schema Inference](#Routing-and-Schema-Inference)
+* [Uploading to Sentinel](#Uploading-to-Sentinel)
 <br><br>
 
 ## Ingestion and Tagging
@@ -68,7 +69,7 @@ The schema is inferred with the full batch of sampled data and stored into the a
 <br>    
 <br>    
 
-## Sentinel
+## Uploading to Sentinel
 Logs with immediate security value is sent directly to Sentinel. The output group containing these logs are sent to the Sentinel processor group from the routing group above. 
 <br>    
 
