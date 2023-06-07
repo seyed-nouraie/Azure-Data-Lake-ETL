@@ -1,7 +1,7 @@
 # Nifi Base Flow Breakdown
 ### Contents
-* [Ingestion and Tagging](#Ingestion and Tagging)
-* [Routing and Schema Inference](#Routing and Schema Inference)
+* [Ingestion and Tagging](#Ingestion-and-Tagging)
+* [Routing and Schema Inference](#Routing-and-Schema-Inference)
 
 
 
