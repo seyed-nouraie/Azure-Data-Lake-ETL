@@ -55,10 +55,10 @@ The schema is inferred with the full batch of sampled data and stored into the a
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/c74dc641-1fc0-4bdb-a777-7b232d2d96dd">  
 
 
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/328c8373-d02c-448d-a618-652d2e60c818">  
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/328c8373-d02c-448d-a618-652d2e60c818">    
 
 
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">  
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">    
 
 
 ## Sentinel
@@ -74,9 +74,12 @@ A data collection endpoint (DCE) and data collection rule (DCR) have already bee
 
 A DCR can also be configured with [transformations]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-transformations#single-destination)) to send data to [built in tables ]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables)).  
 
-API Call HTTP URL: https://<DCE_URI>/dataCollectionRules/<DCR_ID>/streams/<STREAM_NAME>?api-version=2021-11-01-preview  
+API Call HTTP URL: https://<DCE_URI>/dataCollectionRules/<DCR_ID>/streams/<STREAM_NAME>?api-version=2021-11-01-preview 
+
 Authorization Server URL: https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token  
+
 Scope: https://monitor.azure.com//.default  
+
 
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/791a855e-462d-4ac4-ac93-a2b3f8067f9a">
 
