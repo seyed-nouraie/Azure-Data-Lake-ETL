@@ -1,4 +1,10 @@
 # Nifi Base Flow Breakdown
+### Contents
+* [Ingestion and Tagging](#Ingestion and Tagging)
+* [Routing and Schema Inference](#Routing and Schema Inference)
+
+
+
 
 ## Ingestion and Tagging
 <img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/848ae26c-1593-49b4-966c-bc9a8e57012a">
