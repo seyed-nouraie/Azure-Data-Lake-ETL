@@ -12,7 +12,7 @@ These processors store the syslog headers and body in flowfile attributes.
 ### Tag on Log Type
 This processor uses the syslog body attribute to tag the data with a new, shorter attribute to use for later routing. Then it drops the syslog body attribute.
   
-<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/5fa34974-1156-4a05-9867-4732aab8e8b3">
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/5fa34974-1156-4a05-9867-4732aab8e8b3">
 
 
 Tagging is done based on advanced rules in the processor. The advanced rule matches the syslog body and assigns the sender.type attribute with the value devicetype.logtype:
@@ -26,7 +26,23 @@ Records with the same sender.type are batched into single flowfiles. This increa
   
   
 ## Routing and Schema Inference
-<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/0492fa2c-e203-424a-b6b5-22ca55ab6a3b">
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/0492fa2c-e203-424a-b6b5-22ca55ab6a3b">
+
+### Route - Log Sender and Attribute
+Records are sent to different output groups based on the sender.type attribute. This is to enable further routing downstream and schema inference.
+
+### Schema Inference
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/8e85f06d-b83e-402c-9b7b-5eb8eff25192">
+
+This processor group allows for asynchronous schema inference. This reduces the load of real time full schema inference while also preventing the need to manually add and update a schema.
+This works best for log types with relatively consitent schemas, or log types for which the full schema can be represented by a sample of the logs.
+
+#### Control Rate
+Data is sampled using this processor group. This sampling rate can be increased to account for more volatile schemas.
+
+<img width="230" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/17f9089d-7738-4ee7-80f7-773476fe9d52">
+
+
 
 
 
