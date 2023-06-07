@@ -5,23 +5,20 @@
 
 
 ### ListenSyslog
-There are two listen syslog processors, one for UDP and one for TCP, listening on different ports. The syslog messages are parsed individually and delimited with a newline character. This is so that they can each be tagged according to their content. 
-These processors store the syslog headers and body in flowfile attributes.
+We start with listening on for Syslog. There are two listen syslog processors, one for UDP and one for TCP, each listening on different ports. 
+The syslog messages are handled individually so that the processor can parses the headers and syslog body and store their values into flowfile attribute. The syslog body attribute (syslog.body), will be used for tagging each flowfile acccording to the message type.
 
 
 ### Tag on Log Type
-This processor uses the syslog body attribute to tag the data with a new, shorter attribute to use for later routing. Then it drops the syslog body attribute.
+Now that the syslog body is available in an attribute, we can tag the flowfile according to its content. This processor uses rules that look for matches in the syslog.body attribute. According to the match they find they add a new attribute called sender.type. After adding this attribute the processor removes the longer, full syslog.body attribute since the flowfile attributes now have what they need for downstream routing.
   
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/5fa34974-1156-4a05-9867-4732aab8e8b3">
 
-
-Tagging is done based on advanced rules in the processor. The advanced rule matches the syslog body and assigns the sender.type attribute with the value devicetype.logtype:
-  
 <img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6ac03fd2-a8fa-4f4b-9395-31b561eb44a9">
   
     
 ### Merge by Log Type
-Records with the same sender.type are batched into single flowfiles. This increases efficiency downstream.
+Records with the same sender.type are merged together. This batching increases efficiency downstream.
 <img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/ae2bef3a-0b59-4bc7-8eca-1912181e1b37">
   
   
