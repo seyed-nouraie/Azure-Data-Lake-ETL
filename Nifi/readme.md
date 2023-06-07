@@ -21,7 +21,6 @@ Now that the syslog body is available in an attribute, we can tag the flowfile a
 
 After adding this attribute the processor removes the longer syslog.body attribute. We no longer need this attribute since the flowfile attributes now have what they need for downstream routing.
   
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/5fa34974-1156-4a05-9867-4732aab8e8b3">
 
 <img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6ac03fd2-a8fa-4f4b-9395-31b561eb44a9">
   
@@ -55,7 +54,9 @@ The schema is inferred with the full batch of sampled data and stored into the a
 
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/c74dc641-1fc0-4bdb-a777-7b232d2d96dd">
 
+
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/328c8373-d02c-448d-a618-652d2e60c818">
+
 
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">
 
