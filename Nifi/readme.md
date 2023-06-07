@@ -52,13 +52,13 @@ Data is sampled using this processor group. This sampling rate can be increased 
 #### Schema Inference and Cache Storage
 The schema is inferred with the full batch of sampled data and stored into the avro.schema attribute. This attribute then replaces the full flowfile text in the replacetext processor. Then this whole flowfile is stored in cache with the identifier being the same sender.type attribute.
 
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/c74dc641-1fc0-4bdb-a777-7b232d2d96dd">
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/c74dc641-1fc0-4bdb-a777-7b232d2d96dd">  
 
 
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/328c8373-d02c-448d-a618-652d2e60c818">
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/328c8373-d02c-448d-a618-652d2e60c818">  
 
 
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">  
 
 
 ## Sentinel
@@ -72,11 +72,11 @@ The logs are converted from CEF to JSON. The record reader can use realtime sche
 ### Azure Monitor HTTP API
 A data collection endpoint (DCE) and data collection rule (DCR) have already been created in Azure using [this tutorial]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal)). This processor sends logs to Azure monitor using that DCE. The processor performs authentication using an Oauth2 controller service, which uses Azure client credentials that have been granted access to that DCR.  
 
-A DCR can also be configured with [transformations]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-transformations#single-destination)) to send data to [built in tables ]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables)).
+A DCR can also be configured with [transformations]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-transformations#single-destination)) to send data to [built in tables ]([url](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables)).  
 
-API Call HTTP URL: https://<DCE_URI>/dataCollectionRules/<DCR_ID>/streams/<STREAM_NAME>?api-version=2021-11-01-preview
-Authorization Server URL: https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token
-Scope: https://monitor.azure.com//.default
+API Call HTTP URL: https://<DCE_URI>/dataCollectionRules/<DCR_ID>/streams/<STREAM_NAME>?api-version=2021-11-01-preview  
+Authorization Server URL: https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token  
+Scope: https://monitor.azure.com//.default  
 
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/791a855e-462d-4ac4-ac93-a2b3f8067f9a">
 
