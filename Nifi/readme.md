@@ -3,6 +3,7 @@
 * [Ingestion and Tagging](#Ingestion-and-Tagging)
 * [Routing and Schema Inference](#Routing-and-Schema-Inference)
 * [Uploading to Sentinel](#Uploading-to-Sentinel)
+* [Uploading to Data Lake](#Uploading-to-Data-Lake)
 <br><br>
 
 ## Ingestion and Tagging
