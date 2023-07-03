@@ -5,4 +5,4 @@ Flows to route data from on premise to Azure.
 NiFi flow [here](https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/tree/main/Nifi)
 
 ## Palo Alto configuration
-Sample syslog configuration templates can be found [here](https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/tree/main/LogFormats)
+Sample syslog configuration templates [here](https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/tree/main/LogFormats)
