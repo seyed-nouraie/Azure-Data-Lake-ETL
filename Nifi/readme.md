@@ -79,10 +79,12 @@ Each pipeline is given the schema that we inferred earlier from the log type. En
 <br>
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/22a1ca9a-3f02-4e9c-b44a-cb82a2d4e8fb">
 <br><br>
+
 ### First and Second Merges
 Batching is done twice. First the records are converted to parquet and batched for a total of 10-10000 records, then the parquet files are batched into 1 minute bins with a max batch size of 50000000 records.
 <br><br> Two merges are used to avoid the first merge filling up the heap space while waiting for the one minute bin, as recommended [here](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.5.0/org.apache.nifi.processors.standard.MergeRecord/additionalDetails.html)
 <br><br>
+
 ### Send to Data Lake
 We are now ready to upload our logs to the data lake, each sender.type getting its own container. This is done in a yy-MM-dd/HH/mm format. Authentication to the data lake can be done with a key, SAS token, managed identity, or service principal client ID and secret.
 
