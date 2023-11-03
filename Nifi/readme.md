@@ -73,6 +73,7 @@ All logs are loaded to adls. Each log sender.type gets its own queue since each 
 
 <br>
 <br>
+
 ### Schema
 Each pipeline is given the schema that we inferred earlier from the log type. Ensure that the schema aligns to what you expect the source data to look like.
 <br>
