@@ -21,9 +21,6 @@ We use Route Text to send different log types to different downstream pipelines 
 <br>
 
 
-<img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6ac03fd2-a8fa-4f4b-9395-31b561eb44a9">
-<br>    
-    
 ### Schema Inference
 <img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6c175866-1832-42d7-b438-40b4ca8a0fda">
 
