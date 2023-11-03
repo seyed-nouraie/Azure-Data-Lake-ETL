@@ -1,7 +1,7 @@
 # Nifi Base Flow Breakdown
 ### Contents
-* [Ingestion and Tagging](#Ingestion-and-Tagging)
-* [Routing and Schema Inference](#Routing-and-Schema-Inference)
+* [Ingestion and Routing](#Ingestion-and-Routing)
+* [Ad-Hoc Schema Inference](#Schema-Inference)
 * [Uploading to Sentinel](#Uploading-to-Sentinel)
 * [Uploading to Data Lake](#Uploading-to-Data-Lake)
 <br><br>
@@ -10,7 +10,7 @@
 <img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/4acac6af-92de-4191-879e-009b7c1b05e9">
 <br><br>
 
-### Listen[UDP|TCP]
+### Listeners
 We start with listening for messages. There are two processors, one for UDP and one for TCP, each listening on a different port. We do not use a listensyslog to decouple ingestion and parsing. This helps avoid log dropping with traffic spikes.
 <br>
 
@@ -24,7 +24,7 @@ We use Route Text to send different log types to different downstream pipelines 
 <img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6ac03fd2-a8fa-4f4b-9395-31b561eb44a9">
 <br>    
     
-### Infer Schema
+### Schema Inference
 <img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6c175866-1832-42d7-b438-40b4ca8a0fda">
 
 We use a Merge Record processor for Ad Hoc schema inference. The record writer must match the input of the data you expect with the schema inferred and the record writer should be JSON that writes the schema into the FlowFile attributes. 
@@ -33,45 +33,8 @@ When ingesting a new log type, we route the log to this processor, and view the 
 <br>    
 <br>    
 <br>    
-  
-## Parquet Conversion and Data Lake Landing
-<img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/5add8fc7-2700-4a17-a29f-9021f56bf7d9">
-<br>    
 
 
-### Route - Log Sender and Attribute
-Records are sent to different output groups based on the sender.type attribute. This is to enable further routing downstream and schema inference.
-<br>    
-
-### Schema Inference
-<br>    
-<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/8e85f06d-b83e-402c-9b7b-5eb8eff25192">
-<br>    
-
-This processor group allows for asynchronous schema inference. This reduces the load of real time full schema inference while also preventing the need to manually add and update a schema.
-This works best for log types with relatively consitent schemas, or log types for which the full schema can be represented by a sample of the logs.
-<br>    
-
-#### Control Rate
-Data is sampled using this processor group. This sampling rate can be increased to account for more volatile schemas.
-
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/17f9089d-7738-4ee7-80f7-773476fe9d52">
-
-
-<br>    
-
-#### Schema Inference and Cache Storage
-The schema is inferred with the full batch of sampled data and stored into the avro.schema attribute. This attribute then replaces the full flowfile text in the replacetext processor. Then this whole flowfile is stored in cache with the identifier being the same sender.type attribute.
-<br>    
-
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/c74dc641-1fc0-4bdb-a777-7b232d2d96dd">  
-<br>
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/328c8373-d02c-448d-a618-652d2e60c818">    
-<br>
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/97897264-6a1d-48c8-aff4-893445f0f21d">    
-<br>
-<br>    
-<br>    
 
 ## Uploading to Sentinel
 Logs with immediate security value is sent directly to Sentinel. The output group containing these logs are sent to the Sentinel processor group from the routing group above. 
@@ -112,10 +75,10 @@ All logs are loaded to adls. Each log sender.type gets its own queue since each 
 <img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/32e884a3-4d62-4fa4-80bf-904f39100598">
 <br>
 <br>
-### Schema Lookup
-Each pipeline looks up its schema from cache with the identifier being that file's sender.type. This is retried until the schema is found since the schema may take a minute to poulate.
+### Schema
+Each pipeline is given the schema that we inferred earlier from the log type. Ensure that the schema aligns to what you expect the source data to look like.
 <br>
-<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/4149c3e1-3c88-4025-aecf-8d9645eacc31">
+<img width="500" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/22a1ca9a-3f02-4e9c-b44a-cb82a2d4e8fb">
 <br><br>
 ### Batch to Parquet and Batch 1 Minute
 Batching is done twice. First the records are converted to parquet and batched for a total of 10-10000 records, then the parquet files are batched into 1 minute bins with a max batch size of 50000000 records.
