@@ -6,35 +6,38 @@
 * [Uploading to Data Lake](#Uploading-to-Data-Lake)
 <br><br>
 
-## Ingestion and Tagging
-<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/848ae26c-1593-49b4-966c-bc9a8e57012a">
+## Ingestion and Routing
+<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/4acac6af-92de-4191-879e-009b7c1b05e9">
 <br><br>
 
-### ListenSyslog
-We start with listening for Syslog messages. There are two listen syslog processors, one for UDP and one for TCP, each listening on a different port. 
-<br>
-The syslog messages are handled individually. This lets the processor extract the syslog headers and syslog body and store those values into flowfile attributes. The extracted syslog body attribute, syslog.body, will later be used for tagging each flowfile acccording to the message type.
+### Listen[UDP|TCP]
+We start with listening for messages. There are two processors, one for UDP and one for TCP, each listening on a different port. We do not use a listensyslog to decouple ingestion and parsing. This helps avoid log dropping with traffic spikes.
 <br>
 
-### Tag on Log Type
-Now that the syslog body is available in an attribute, we can tag the flowfile according to the syslog message content. This processor uses rules that look for matches in the syslog.body attribute. According to the match they find they add a new attribute called sender.type. 
+### Route Text
+
+<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/b7e926aa-8ba8-44d8-a68e-12617c7c87c6">
+We use Route Text to send different log types to different downstream pipelines for parquet conversion and landing in their own containers in the data lake. If your sources all contain the same log type (ie syslog, JSON...) you can use the Query Record streaming processor for faster routing. 
 <br>
-After adding this attribute the processor removes the longer syslog.body attribute. We no longer need this attribute since the flowfile attributes now have what they need for downstream routing.
-  <br>
+
 
 <img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6ac03fd2-a8fa-4f4b-9395-31b561eb44a9">
 <br>    
     
-### Merge by Log Type
-Records with the same sender.type are merged together. This batching increases efficiency downstream.
-<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/ae2bef3a-0b59-4bc7-8eca-1912181e1b37">
+### Infer Schema
+<img width="800" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/6c175866-1832-42d7-b438-40b4ca8a0fda">
+
+We use a Merge Record processor for Ad Hoc schema inference. The record writer must match the input of the data you expect with the schema inferred and the record writer should be JSON that writes the schema into the FlowFile attributes. 
+<br>
+When ingesting a new log type, we route the log to this processor, and view the attributes of the outputted FlowFiles to gather the schema. We will use this schema in the processors below.
 <br>    
 <br>    
 <br>    
   
-## Routing and Schema Inference
-<img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/0492fa2c-e203-424a-b6b5-22ca55ab6a3b">
+## Parquet Conversion and Data Lake Landing
+<img width="1000" alt="image" src="https://github.com/seyed-nouraie/Azure-Data-Lake-ETL/assets/75258742/5add8fc7-2700-4a17-a29f-9021f56bf7d9">
 <br>    
+
 
 ### Route - Log Sender and Attribute
 Records are sent to different output groups based on the sender.type attribute. This is to enable further routing downstream and schema inference.
